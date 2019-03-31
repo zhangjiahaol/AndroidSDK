@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.6
+
+```console
+docker pull thyrlian/android-sdk:2.6
+```
+
+**What's New**
+* Upgraded Ubuntu from 16.04.5 to 16.04.6
+
+Component | Version
+--------- | -------
+Ubuntu | 16.04.6 LTS (Xenial Xerus)
+Java | 1.8.0_191
+Gradle | 4.10.3
+Kotlin compiler | 1.3.11
+AndroidSDK | 26.1.1
+OpenSSH | 7.2p2-4
+
+---
+
 ## 2.5
 
 ```console
