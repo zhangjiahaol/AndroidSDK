@@ -48,6 +48,8 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
     rm *tools*linux*.zip
 
 # set the environment variables
+ENV LANG=C.UTF-8
+ENV ADB_INSTALL_TIMEOUT 120
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV GRADLE_HOME /opt/gradle
 ENV KOTLIN_HOME /opt/kotlinc
@@ -61,7 +63,6 @@ ADD license_accepter.sh /opt/
 RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_HOME
 
 # install sdkmanager 
-ENV LANG=C.UTF-8
 RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
 RUN yes | sdkmanager --licenses && yes | sdkmanager --update
