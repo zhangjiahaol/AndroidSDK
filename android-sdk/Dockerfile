@@ -60,6 +60,37 @@ ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib6
 ADD license_accepter.sh /opt/
 RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_HOME
 
+# install sdkmanager 
+ENV LANG=C.UTF-8
+RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
+RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+RUN yes | sdkmanager --licenses && yes | sdkmanager --update
+
+# Update SDK manager and install system image, platform and build tools
+RUN sdkmanager \
+  "tools" \
+  "platform-tools" \
+  "emulator"
+  
+RUN sdkmanager \
+  "build-tools;25.0.0" \
+  "build-tools;25.0.1" \
+  "build-tools;25.0.2" \
+  "build-tools;25.0.3" \
+  "build-tools;26.0.1" \
+  "build-tools;26.0.2" \
+  "build-tools;27.0.0" \
+  "build-tools;27.0.1" \
+  "build-tools;27.0.2" \
+  "build-tools;27.0.3" \
+  "build-tools;28.0.0" \
+  "build-tools;28.0.1" \
+  "build-tools;28.0.2" \
+  "build-tools;28.0.3" \
+  "build-tools;29.0.0" \
+  "build-tools;29.0.1" \
+  "build-tools;29.0.2"
+
 # setup adb server
 EXPOSE 5037
 
@@ -85,6 +116,7 @@ RUN apt-get update -y && \
     do if [ -f "$file" ]; then echo "\n" >> $FILE_AUTH_KEYS && cat $file >> $FILE_AUTH_KEYS && echo "\n" >> $FILE_AUTH_KEYS; fi; \
     done && \
     (rm /tmp/*.pub 2> /dev/null || true)
+ 
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 CMD ["/usr/bin/supervisord"]
