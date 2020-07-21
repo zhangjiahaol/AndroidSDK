@@ -72,7 +72,12 @@ RUN sdkmanager \
   "tools" \
   "platform-tools" \
   "emulator"
+
+# install: Android SDK Platform
+RUN sdkmanager \
+  "platforms;android-28"
   
+# install: Android SDK Build-Tools
 # https://developer.android.google.cn/studio/releases/build-tools
 RUN sdkmanager \
   "build-tools;25.0.0" \
