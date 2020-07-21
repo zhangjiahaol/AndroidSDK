@@ -73,6 +73,7 @@ RUN sdkmanager \
   "platform-tools" \
   "emulator"
   
+# https://developer.android.google.cn/studio/releases/build-tools
 RUN sdkmanager \
   "build-tools;25.0.0" \
   "build-tools;25.0.1" \
